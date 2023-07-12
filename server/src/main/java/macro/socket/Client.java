@@ -74,17 +74,35 @@ public class Client {
     return salariesString;
   }
 
+  private String buildSalaryMessage() {
+    try {
+      List<Salary> salaries = getSalaries();
+      String salariesString = salariesToString(salaries);
+      String message = "salaries___" + salariesString;
+
+      return message;
+    } catch (Exception e) {
+      System.out.println("Error building salary message: " + e.getMessage());
+
+      return null;
+    }
+  }
+
   public static void main(String[] args) {
     Client client = new Client();
     boolean clientConnected = client.startConnection("127.0.0.1", 6666);
 
-    if (clientConnected) System.out.println("Client connected to server");
+    if (!clientConnected) {
+      System.out.println("Error connecting to server");
+
+      return;
+    }
+
+    System.out.println("Client connected to server");
 
     try {
-      List<Salary> salaries = client.getSalaries();
-      String salariesString = client.salariesToString(salaries);
-      String message = "salaries___" + salariesString;
-      String response = client.sendMessage(message);
+      String salaryMessage = client.buildSalaryMessage();
+      String response = client.sendMessage(salaryMessage);
       System.out.println("Server response: " + response);
     } catch (Exception e) {
       System.out.println("Error sending message to server: " + e.getMessage());
