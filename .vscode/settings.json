@@ -3,5 +3,6 @@
   "cSpell.enableFiletypes": [
     "java"
   ],
-  "cSpell.language": "en,es-ES"
+  "cSpell.language": "en,es-ES",
+  "java.configuration.updateBuildConfiguration": "automatic"
 }
