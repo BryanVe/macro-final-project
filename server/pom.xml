@@ -28,13 +28,13 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-streaming_2.12</artifactId>
             <version>3.2.1</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
           <groupId>org.projectlombok</groupId>
           <artifactId>lombok</artifactId>
           <version>1.18.28</version>
-          <scope>provided</scope>
+          <scope>compile</scope>
         </dependency>
         <dependency>
           <groupId>com.opencsv</groupId>
