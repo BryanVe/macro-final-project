@@ -1,40 +1,23 @@
 package macro;
 
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SparkSession;
-import org.apache.spark.sql.streaming.StreamingQuery;
-import org.apache.spark.sql.streaming.StreamingQueryException;
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaSparkContext;
 
-import java.util.concurrent.TimeoutException;
+public class SimpleSparkApp {
+    public static void main(String[] args) {
+        // Configurar la aplicación de Spark
+        SparkConf conf = new SparkConf()
+                .setAppName("Simple Spark App")
+                .setMaster("spark://localhost:7077"); // Especifica la URL del maestro del clúster
 
-class SparkStreamingApp {
-  public static void main(String[] args) throws StreamingQueryException, TimeoutException {
-    // Crear una instancia de SparkSession
-    SparkSession spark = SparkSession
-      .builder()
-      .appName("Spark Streaming App")
-      .master("spark://localhost:7077")
-      .getOrCreate();
+        // Crear el contexto de Spark
+        JavaSparkContext sc = new JavaSparkContext(conf);
 
-    // Crear un DataFrame representando los datos de streaming
-    Dataset<Row> dataStream = spark
-      .readStream()
-      .format("socket")
-      .option("host", "localhost")
-      .option("port", 9999)
-      .load();
+        System.out.println("SparkContext creado exitosamente!");
 
-    // Realizar operaciones de transformación y acción en los datos de streaming
-    Dataset<Row> transformedData = dataStream.selectExpr("value AS message");
+        // Detener el contexto de Spark
+        sc.stop();
 
-    // Escribir los resultados en la consola
-    StreamingQuery query = transformedData.writeStream()
-      .format("console")
-      .outputMode("append")
-      .start();
-
-    // Iniciar la ejecución del streaming
-    query.awaitTermination();
-  }
+        System.out.println("SparkContext detenido exitosamente!");
+    }
 }
