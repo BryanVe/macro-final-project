@@ -4,5 +4,8 @@
     "java"
   ],
   "cSpell.language": "en,es-ES",
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "cSpell.words": [
+    "gson"
+  ]
 }
