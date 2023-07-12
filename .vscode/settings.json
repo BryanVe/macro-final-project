@@ -1,0 +1,7 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "cSpell.enableFiletypes": [
+    "java"
+  ],
+  "cSpell.language": "en,es-ES"
+}

@@ -16,8 +16,8 @@ sh run.sh
 
 ```sh
 # Ingresar al contenedor que tiene spark
-docker exec -it spark-shell bash
+docker exec -it master-node bash
 
 # Ejecutar cualquier archivo .scala
-../bin/spark-shell --master spark://master-node:7077
+../bin/master-node --master spark://master-node:7077
 ```
