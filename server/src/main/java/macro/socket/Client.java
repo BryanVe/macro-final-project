@@ -69,18 +69,16 @@ public class Client {
   private String salariesToString(List<Salary> salaries) {
     Gson gson = new GsonBuilder().create();
     JsonArray jsonArray = gson.toJsonTree(salaries).getAsJsonArray();
-    String salariesString = jsonArray.toString();
 
-    return salariesString;
+    return jsonArray.toString();
   }
 
   private String buildSalaryMessage() {
     try {
       List<Salary> salaries = getSalaries();
       String salariesString = salariesToString(salaries);
-      String message = "salaries___" + salariesString;
 
-      return message;
+      return "salaries___" + salariesString;
     } catch (Exception e) {
       System.out.println("Error building salary message: " + e.getMessage());
 
@@ -106,7 +104,6 @@ public class Client {
       System.out.println("Server response: " + response);
     } catch (Exception e) {
       System.out.println("Error sending message to server: " + e.getMessage());
-      return;
     } finally {
       boolean clientDisconnected = client.stopConnection();
 

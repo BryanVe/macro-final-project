@@ -34,24 +34,27 @@ public class Server {
   private void start(int port) {
     try {
       serverSocket = new ServerSocket(port);
-      clientSocket = serverSocket.accept();
-      out = new PrintWriter(clientSocket.getOutputStream(), true);
-      in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-      String inputLine;
 
-      while ((inputLine = in.readLine()) != null) {
-        System.out.println(inputLine);
+      while (true) {
+        clientSocket = serverSocket.accept();
+        out = new PrintWriter(clientSocket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        String inputLine;
 
-        if (inputLine.contains("salaries")) {
-          List<Salary> salariesList = readSalaries(inputLine.split("___")[1]);
+        while ((inputLine = in.readLine()) != null) {
+          System.out.println(inputLine);
 
-          if (Objects.nonNull(salariesList)) out.println("salaries received!");
-          else out.println("error receiving salaries!");
-        } else if (inputLine.equals("bye")) {
-          out.println("bye");
-          break;
-        } else {
-          out.println("not supported command");
+          if (inputLine.contains("salaries")) {
+            List<Salary> salariesList = readSalaries(inputLine.split("___")[1]);
+
+            if (Objects.nonNull(salariesList)) out.println("salaries received!");
+            else out.println("error receiving salaries!");
+          } else if (inputLine.equals("bye")) {
+            out.println("bye");
+            break;
+          } else {
+            out.println("not supported command");
+          }
         }
       }
     } catch (IOException e) {
